@@ -25,6 +25,8 @@ func init() {
 	*/
 
 	// Definerer og initialiserer flagg-variablene
+	flag.Float64Var(&celsius, "C", 0.0, "temperatur i grader celsius")
+	flag.Float64Var(&kelvin, "K", 0.0, "temperatur i grader Kelvin")
 	flag.Float64Var(&fahr, "F", 0.0, "temperatur i grader fahrenheit")
 	// Du må selv definere flag-variablene for "C" og "K"
 	flag.StringVar(&out, "out", "C", "beregne temperatur i C - celsius, F - farhenheit, K- Kelvin")
@@ -37,39 +39,78 @@ func init() {
 func main() {
 
 	flag.Parse()
+	
+	var res float64
 
-	//konvertering av Fahrenheit
-	if out == "C" {
-		celsius := conv.FarhenheitToCelsius(fahr)
-		fmt.Printf("%v degrees Fahrenheit is %v degrees celsius\n", fahr, celsius)
-	} else if out == "K" {
-		kelvin := conv.FahrenheitToKelvin(fahr) 
-			fmt.Printf("%v degrees Fahrenheit is %v Kelvin\n", fahr, kelvin)
-	} else {
-		fmt.Printf("Invalid output unit specified\n")
-	}
+	if celsius != 0 {
+        if out == "F" {
+            res = conv.CelsiusToFahrenheit(celsius)
+			fmt.Printf("%v °C er %v °F\n", celsius, res,)
+        } else if out == "K" {
+            res = conv.CelsiusToKelvin(celsius)
+			fmt.Printf("%v °C er %v °K\n", kelvin, res,)
+        }
+    }
+  
 
-	//Konvertering av Celsius
-	if out == "F" {
-		fahr := conv.CelsiusToFahrenheit(celsius) 
-			fmt.Printf("%v degrees Celsius is %v Fahrenheit\n", celsius, fahr)
-	}else if out == "K" {
-		kelvin := conv.CelsiusToKelvin(celsius)
-		fmt.Printf("%v degrees Celsius is %v Kelvin\n", celsius, kelvin)
-	} else {
-		fmt.Printf("Invalid output unit specified\n")
-	}
+	if fahr != 0 {
+        if out == "C" {
+            res = conv.FarhenheitToCelsius(fahr)
+			fmt.Printf("%v °F er %v °C\n", fahr, res,)
+        } else if out == "K" {
+            res = conv.FahrenheitToKelvin(fahr)
+			fmt.Printf("%v °F er %v °K\n", fahr, res,)
+        }
+    }
+    
 
-	//Konvertering av Kelvin
-	if out == "C" {
-		celsius := conv.KelvinToCelsius(kelvin)
-		fmt.Printf("%v degrees Kelvin is %v Celsius\n", kelvin, celsius)
-	} else if out == "F"{
-		fahr := conv.KelvinToFahrenheit(kelvin)
-		fmt.Printf("%v degrees Kelvin is %v Fahrenheit\n", kelvin, fahr)
-	} else {
-		fmt.Printf("Invalid output unit specified\n")
-	}
+	if kelvin != 0 {
+        if out == "F" {
+            res = conv.KelvinToFahrenheit(kelvin)
+			fmt.Printf("%v °K er %v °F\n", fahr, res,)
+        } else if out == "C" {
+            res = conv.KelvinToCelsius(kelvin)
+			fmt.Printf("%v °K er %v °C\n", kelvin, res,)
+        }
+    }
+	
+    
+	
+	// //konvertering av Fahrenheit
+	// if out == "C"{
+	// 	celsius := conv.FarhenheitToCelsius(fahr)
+	// 	fmt.Printf("%v grader Fahrenheit er %v grader celsius\n", fahr, celsius)
+	// } else if out == "K" {
+	// 	kelvin := conv.FahrenheitToKelvin(fahr) 
+	// 	fmt.Printf("%v grader Fahrenheit er %v grader Kelvin\n", fahr, kelvin)
+	// } else {
+	// 	fmt.Printf("Invalid output brukt\n")
+	// }
+
+
+	// //Konvertering av Celsius
+	// if out == "F" {
+	// 	fahr := conv.CelsiusToFahrenheit(celsius) 
+	// 	fmt.Printf("%v degrees Celsius is %v Fahrenheit\n", celsius, fahr)
+	// }else if out == "K" {
+	// 	kelvin := conv.CelsiusToKelvin(celsius)
+	// 	fmt.Printf("%v degrees Celsius is %v Kelvin\n", celsius, kelvin)
+	// } else {
+	// 	fmt.Printf("Invalid output unit specified\n")
+	// }
+	
+
+	// 	//Konvertering av Kelvin
+	// if out == "C" {
+	// 	celsius := conv.KelvinToCelsius(kelvin)
+	// 	fmt.Printf("%v degrees Kelvin is %v Celsius\n", kelvin, celsius)
+	// } else if out == "F"{
+	// 	fahr := conv.KelvinToFahrenheit(kelvin)
+	// 	fmt.Printf("%v degrees Kelvin is %v Fahrenheit\n", kelvin, fahr)
+	// } else {
+	// 	fmt.Printf("Invalid output unit specified\n")
+	// }
+	
 
 	/**
 	    Her må logikken for flaggene og kall til funksjoner fra conv og funfacts
