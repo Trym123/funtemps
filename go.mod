@@ -1,3 +1,3 @@
-module github.com/Trym123/fun-temps
+module github.com/Trym123/funtemps
 
 go 1.19

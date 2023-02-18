@@ -3,10 +3,13 @@ package main
 import (
 	"flag"
 	"fmt"
+	"github.com/Trym123/funtemps/conv"
 )
 
 // Definerer flag-variablene i hoved-"scope"
 var fahr float64
+var celsius float64
+var kelvin float64
 var out string
 var funfacts string
 
@@ -34,6 +37,39 @@ func init() {
 func main() {
 
 	flag.Parse()
+
+	//konvertering av Fahrenheit
+	if out == "C" {
+		celsius := conv.FarhenheitToCelsius(fahr)
+		fmt.Printf("%v degrees Fahrenheit is %v degrees celsius\n", fahr, celsius)
+	} else if out == "K" {
+		kelvin := conv.FahrenheitToKelvin(fahr) 
+			fmt.Printf("%v degrees Fahrenheit is %v Kelvin\n", fahr, kelvin)
+	} else {
+		fmt.Printf("Invalid output unit specified\n")
+	}
+
+	//Konvertering av Celsius
+	if out == "F" {
+		fahr := conv.CelsiusToFahrenheit(celsius) 
+			fmt.Printf("%v degrees Celsius is %v Fahrenheit\n", celsius, fahr)
+	}else if out == "K" {
+		kelvin := conv.CelsiusToKelvin(celsius)
+		fmt.Printf("%v degrees Celsius is %v Kelvin\n", celsius, kelvin)
+	} else {
+		fmt.Printf("Invalid output unit specified\n")
+	}
+
+	//Konvertering av Kelvin
+	if out == "C" {
+		celsius := conv.KelvinToCelsius(kelvin)
+		fmt.Printf("%v degrees Kelvin is %v Celsius\n", kelvin, celsius)
+	} else if out == "F"{
+		fahr := conv.KelvinToFahrenheit(kelvin)
+		fmt.Printf("%v degrees Kelvin is %v Fahrenheit\n", kelvin, fahr)
+	} else {
+		fmt.Printf("Invalid output unit specified\n")
+	}
 
 	/**
 	    Her må logikken for flaggene og kall til funksjoner fra conv og funfacts
